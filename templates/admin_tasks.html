@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Gerenciar tarefas{% endblock %}
+{% block content %}
+<section class="admin-page"><div class="container">
+  <div class="admin-heading"><div><p class="eyebrow">ORGANIZAÇÃO</p><h1>Gerenciar tarefas</h1><p class="muted">Um pequeno sistema CRUD para praticar integração com MySQL.</p></div><a class="btn btn-secondary" href="{{ url_for('dashboard') }}">← Painel</a></div>
+  <div class="admin-columns">
+    <section class="panel-card"><div class="panel-heading"><h2>Nova tarefa</h2></div><form method="post" class="form-stack">
+      <label for="title">Título *</label><input id="title" name="title" maxlength="160" required placeholder="Ex.: Finalizar projeto Python">
+      <label for="description">Descrição</label><textarea id="description" name="description" rows="3" placeholder="Detalhes da tarefa..."></textarea>
+      <label for="priority">Prioridade</label><select id="priority" name="priority"><option>Baixa</option><option selected>Média</option><option>Alta</option></select>
+      <label for="status">Status inicial</label><select id="status" name="status"><option>Pendente</option><option>Em andamento</option><option>Concluída</option></select>
+      <label for="due_date">Prazo (opcional)</label><input id="due_date" type="date" name="due_date">
+      <button class="btn btn-primary" type="submit">+ Cadastrar tarefa</button>
+    </form></section>
+    <section class="panel-card"><div class="panel-heading"><h2>Tarefas <span class="count-badge">{{ tasks|length }}</span></h2></div>
+      {% if tasks %}<div class="admin-list">{% for task in tasks %}<article class="task-item"><div class="task-main"><h3>{{ task.title }}</h3>{% if task.description %}<p>{{ task.description }}</p>{% endif %}<div class="task-meta"><span class="priority-{{ task.priority|lower }}">{{ task.priority }} prioridade</span>{% if task.due_date %}<span>Prazo: {{ task.due_date.strftime('%d/%m/%Y') }}</span>{% endif %}</div></div><div class="task-controls"><form method="post" action="{{ url_for('update_task_status', task_id=task.id) }}"><select name="status" aria-label="Status da tarefa" onchange="this.form.submit()">{% for status in ['Pendente', 'Em andamento', 'Concluída'] %}<option {% if task.status == status %}selected{% endif %}>{{ status }}</option>{% endfor %}</select></form><form method="post" action="{{ url_for('delete_task', task_id=task.id) }}" onsubmit="return confirm('Excluir esta tarefa?')"><button class="btn btn-danger btn-small" type="submit">Excluir</button></form></div></article>{% endfor %}</div>{% else %}<p class="empty-inline">Nenhuma tarefa cadastrada. Crie a primeira ao lado.</p>{% endif %}
+    </section>
+  </div>
+</div></section>
+{% endblock %}

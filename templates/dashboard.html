@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Painel administrativo{% endblock %}
+{% block content %}
+<section class="admin-page"><div class="container">
+  <div class="admin-heading"><div><p class="eyebrow">VISÃO GERAL</p><h1>Painel de gestão</h1><p class="muted">Acompanhe os projetos e organize suas tarefas.</p></div><a class="btn btn-secondary" href="{{ url_for('index') }}">Ver site ↗</a></div>
+  <div class="stats-grid">
+    <article class="stat-card"><span class="stat-icon">▧</span><p>Projetos cadastrados</p><strong>{{ total_projects }}</strong><span class="stat-foot">No portfólio</span></article>
+    <article class="stat-card"><span class="stat-icon">☷</span><p>Total de tarefas</p><strong>{{ total_tasks }}</strong><span class="stat-foot">Registradas no sistema</span></article>
+    <article class="stat-card"><span class="stat-icon stat-orange">◷</span><p>Pendentes</p><strong>{{ pending_tasks }}</strong><span class="stat-foot">Precisam de atenção</span></article>
+    <article class="stat-card"><span class="stat-icon stat-green">✓</span><p>Concluídas</p><strong>{{ completed_tasks }}</strong><span class="stat-foot">Tarefas finalizadas</span></article>
+  </div>
+  <div class="admin-actions"><a class="action-card" href="{{ url_for('manage_projects') }}"><span class="action-icon">▧</span><div><h3>Gerenciar projetos</h3><p>Adicione e remova trabalhos do portfólio.</p></div><span class="action-arrow">→</span></a><a class="action-card" href="{{ url_for('manage_tasks') }}"><span class="action-icon">☷</span><div><h3>Gerenciar tarefas</h3><p>Cadastre tarefas e atualize seus status.</p></div><span class="action-arrow">→</span></a></div>
+  <div class="panel-card"><div class="panel-heading"><h2>Tarefas recentes</h2><a class="text-link" href="{{ url_for('manage_tasks') }}">Ver todas →</a></div>
+  {% if recent_tasks %}<div class="table-wrap"><table><thead><tr><th>Tarefa</th><th>Prioridade</th><th>Status</th></tr></thead><tbody>{% for task in recent_tasks %}<tr><td>{{ task.title }}</td><td>{{ task.priority }}</td><td><span class="status-pill status-{{ task.status|lower|replace(' ', '-') }}">{{ task.status }}</span></td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="empty-inline">Nenhuma tarefa cadastrada ainda.</p>{% endif %}</div>
+</div></section>
+{% endblock %}

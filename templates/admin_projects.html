@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Gerenciar projetos{% endblock %}
+{% block content %}
+<section class="admin-page"><div class="container">
+  <div class="admin-heading"><div><p class="eyebrow">PORTFÓLIO</p><h1>Gerenciar projetos</h1><p class="muted">Os projetos cadastrados aparecem na página inicial.</p></div><a class="btn btn-secondary" href="{{ url_for('dashboard') }}">← Painel</a></div>
+  <div class="admin-columns">
+    <section class="panel-card"><div class="panel-heading"><h2>Novo projeto</h2></div><form method="post" class="form-stack">
+      <label for="title">Título *</label><input id="title" name="title" maxlength="120" required placeholder="Ex.: Dashboard de vendas">
+      <label for="description">Descrição *</label><textarea id="description" name="description" rows="4" required placeholder="Qual problema o projeto resolve?"></textarea>
+      <label for="technologies">Tecnologias</label><input id="technologies" name="technologies" placeholder="Python, Flask, MySQL">
+      <label for="link">Link do projeto (opcional)</label><input id="link" name="link" type="url" placeholder="https://...">
+      <label class="checkbox-label"><input type="checkbox" name="featured"> Marcar como destaque</label>
+      <button class="btn btn-primary" type="submit">+ Adicionar projeto</button>
+    </form></section>
+    <section class="panel-card"><div class="panel-heading"><h2>Projetos cadastrados <span class="count-badge">{{ projects|length }}</span></h2></div>
+      {% if projects %}<div class="admin-list">{% for project in projects %}<article class="admin-list-item"><div class="list-item-main"><h3>{{ project.title }} {% if project.featured %}<span class="project-label">DESTAQUE</span>{% endif %}</h3><p>{{ project.description }}</p><small>{{ project.technologies }}</small></div><form method="post" action="{{ url_for('delete_project', project_id=project.id) }}" onsubmit="return confirm('Excluir este projeto?')"><button class="btn btn-danger btn-small" type="submit">Excluir</button></form></article>{% endfor %}</div>{% else %}<p class="empty-inline">Nenhum projeto cadastrado.</p>{% endif %}
+    </section>
+  </div>
+</div></section>
+{% endblock %}

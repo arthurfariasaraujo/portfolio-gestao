@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Login administrativo{% endblock %}
+{% block content %}
+<section class="auth-section"><div class="auth-card"><div class="auth-icon">⌘</div><p class="eyebrow">ÁREA RESTRITA</p><h1>Entrar no painel</h1><p class="muted">Gerencie seus projetos e tarefas.</p>
+<form method="post" class="form-stack">
+  <label for="username">Usuário</label><input id="username" name="username" autocomplete="username" required>
+  <label for="password">Senha</label><input id="password" type="password" name="password" autocomplete="current-password" required>
+  <button class="btn btn-primary btn-full" type="submit">Entrar no painel →</button>
+</form><a class="back-link" href="{{ url_for('index') }}">← Voltar ao portfólio</a></div></section>
+{% endblock %}
