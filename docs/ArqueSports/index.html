@@ -1,0 +1,657 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARQUESPORTS | ELECTRIC VOLT</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+:root{
+  --black:#000;
+  --electric-blue:#0033FF;
+  --dark-gray:#111;
+  --white:#fff;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Arial Black","Arial",sans-serif;
+}
+
+body{
+  background:var(--black);
+  color:var(--white);
+  overflow-x:hidden;
+}
+
+/* HEADER FIXO */
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:25px 5%;
+  background:rgba(0,0,0,0.95);
+  border-bottom:1px solid #111;
+  z-index:1000;
+}
+
+/* LOGO */
+.logo{
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:-2px;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+
+.logo span{
+  color:var(--electric-blue);
+}
+
+/* BARRA DE PESQUISA */
+.search-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:230px;
+  padding:10px 14px;
+  border:1px solid #292929;
+  border-radius:30px;
+  background:#101010;
+  color:#aaa;
+  z-index:2;
+}
+
+.search-box i{
+  color:var(--electric-blue);
+  font-size:14px;
+}
+
+.search-box input{
+  width:100%;
+  min-width:0;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:#fff;
+  font-family:Arial,sans-serif;
+  font-size:13px;
+}
+
+.search-box input::placeholder{
+  color:#777;
+}
+
+/* NAV */
+nav{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:35px;
+}
+
+/* DROPDOWN */
+.dropdown{
+  position:relative;
+}
+
+.dropdown > a{
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:30px 0;
+  transition:.3s;
+}
+
+.dropdown > a i:last-child{
+  font-size:11px;
+  transition:transform .3s ease;
+}
+
+.dropdown:hover > a{
+  color:var(--electric-blue);
+}
+
+.dropdown:hover > a i:last-child{
+  transform:rotate(180deg);
+}
+
+/* MEGA MENU */
+.dropdown-content{
+  position:absolute;
+  top:100%;
+  left:50%;
+  transform:translateX(-50%) translateY(20px);
+  width:720px;
+  max-width:92vw;
+  background:rgba(10,10,10,.98);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:35px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  box-shadow:0 30px 80px rgba(0,0,0,.7);
+  transition:.35s ease;
+  z-index:999;
+}
+
+.dropdown:hover .dropdown-content{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
+
+.menu-column h5{
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--electric-blue);
+  margin-bottom:15px;
+}
+
+.menu-column a{
+  display:block;
+  color:#d8d8d8;
+  text-decoration:none;
+  font-family:Arial,sans-serif;
+  font-size:14px;
+  padding:8px 0;
+  transition:.25s;
+}
+
+.menu-column a:hover{
+  color:#fff;
+  transform:translateX(6px);
+}
+
+.menu-banner{
+  background:
+    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.75)),
+    url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200');
+  background-size:cover;
+  background-position:center;
+  border-radius:14px;
+  min-height:220px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:20px;
+}
+
+.menu-banner span{
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#9bb0ff;
+}
+
+.menu-banner strong{
+  display:block;
+  margin:6px 0 12px;
+  font-size:22px;
+  line-height:1;
+  text-transform:uppercase;
+}
+
+.menu-banner a{
+  color:#fff;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.menu-banner a:hover{
+  color:var(--electric-blue);
+}
+
+/* HERO */
+.hero{
+  height:90vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+    url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070');
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  padding:0 5%;
+  margin-top:90px;
+}
+
+.hero-content h2{
+  font-size:85px;
+  line-height:.8;
+  text-transform:uppercase;
+  margin-bottom:20px;
+  font-weight:900;
+  font-style:italic;
+}
+
+.hero-content p{
+  font-size:18px;
+  font-family:Arial,sans-serif;
+  margin-bottom:30px;
+  max-width:500px;
+  line-height:1.6;
+}
+
+.btn-main{
+  background:var(--white);
+  color:var(--black);
+  padding:18px 45px;
+  text-decoration:none;
+  font-weight:900;
+  text-transform:uppercase;
+  display:inline-block;
+  transition:.3s;
+}
+
+.btn-main:hover{
+  background:var(--electric-blue);
+  color:var(--white);
+  box-shadow:0 0 30px rgba(0,51,255,0.6);
+}
+
+/* SHOP */
+.shop-section{
+  padding:100px 5%;
+}
+
+.section-header{
+  margin-bottom:40px;
+}
+
+.section-header h3{
+  font-size:40px;
+  text-transform:uppercase;
+  font-weight:900;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
+
+.product-card{
+  background:var(--dark-gray);
+  transition:.4s;
+  cursor:pointer;
+  overflow:hidden;
+}
+
+.product-card:hover{
+  transform:scale(1.02);
+  box-shadow:0 10px 40px rgba(0,51,255,0.3);
+}
+
+.img-container{
+  width:100%;
+  height:400px;
+  background-size:cover;
+  background-position:center;
+  transition:.4s;
+}
+
+.product-card:hover .img-container{
+  transform:scale(1.05);
+}
+
+.product-info{
+  padding:20px;
+}
+
+.product-info h4{
+  font-size:20px;
+  text-transform:uppercase;
+  margin-bottom:5px;
+}
+
+.product-info p{
+  color:#777;
+  font-family:Arial,sans-serif;
+}
+
+.price{
+  margin-top:10px;
+  color:var(--electric-blue);
+  font-weight:900;
+  font-size:18px;
+}
+
+/* FOOTER */
+footer{
+  padding:80px 5% 40px;
+  border-top:1px solid #222;
+  text-align:center;
+}
+
+.footer-logo{
+  font-size:40px;
+  margin-bottom:20px;
+  opacity:.5;
+}
+
+/* RESPONSIVO */
+@media(max-width:900px){
+  header{
+    padding:18px 4%;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+
+  nav{
+    position:static;
+    transform:none;
+    order:3;
+    width:100%;
+    justify-content:center;
+  }
+
+  .search-box{
+    width:190px;
+    margin-left:auto;
+  }
+
+  .dropdown-content{
+    width:95vw;
+    grid-template-columns:1fr;
+    padding:25px;
+  }
+
+  .menu-banner{
+    min-height:180px;
+  }
+}
+
+@media(max-width:768px){
+  header{
+    padding:14px 4%;
+  }
+
+  .logo{
+    font-size:23px;
+  }
+
+  .search-box{
+    width:170px;
+    padding:8px 11px;
+  }
+
+  nav{
+    position:static;
+    transform:none;
+    width:100%;
+    justify-content:flex-start;
+    overflow-x:auto;
+    gap:20px;
+  }
+
+  .dropdown-content{
+    left:0;
+    transform:translateY(20px);
+    width:320px;
+  }
+
+  .dropdown:hover .dropdown-content{
+    transform:translateY(0);
+  }
+
+  .hero-content h2{
+    font-size:50px;
+  }
+
+  .hero-content p{
+    font-size:16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">ARQUE<span>SPORTS</span></div>
+
+  <nav>
+
+    <!-- LANÇAMENTOS -->
+    <div class="dropdown">
+      <a href="#">
+        <i class="fa-solid fa-bolt"></i>
+        Lançamentos
+        <i class="fa-solid fa-chevron-down"></i>
+      </a>
+
+      <div class="dropdown-content">
+        <div class="menu-column">
+          <h5>Novidades</h5>
+          <a href="#">Running</a>
+          <a href="#">Coleção Volt</a>
+          <a href="#">Tênis Elite</a>
+          <a href="#">Drops Limitados</a>
+        </div>
+
+        <div class="menu-column">
+          <h5>Destaques</h5>
+          <a href="#">Mais Vendidos</a>
+          <a href="#">Promoções</a>
+          <a href="#">Exclusivos</a>
+          <a href="#">Novos Drops</a>
+        </div>
+
+        <div class="menu-banner">
+          <span>Nova Coleção</span>
+          <strong>Electric Volt</strong>
+          <a href="#">Comprar agora →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MASCULINO -->
+    <div class="dropdown">
+      <a href="#">
+        <i class="fa-solid fa-person"></i>
+        Masculino
+        <i class="fa-solid fa-chevron-down"></i>
+      </a>
+
+      <div class="dropdown-content">
+        <div class="menu-column">
+          <h5>Calçados</h5>
+          <a href="#">Tênis Running</a>
+          <a href="#">Tênis Casual</a>
+          <a href="#">Academia</a>
+          <a href="#">Chinelos</a>
+        </div>
+
+        <div class="menu-column">
+          <h5>Roupas</h5>
+          <a href="#">Camisetas</a>
+          <a href="#">Shorts</a>
+          <a href="#">Jaquetas</a>
+          <a href="#">Conjuntos</a>
+        </div>
+
+        <div class="menu-banner">
+          <span>Performance</span>
+          <strong>Men Pro</strong>
+          <a href="#">Explorar →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEMININO -->
+    <div class="dropdown">
+      <a href="#">
+        <i class="fa-solid fa-person-dress"></i>
+        Feminino
+        <i class="fa-solid fa-chevron-down"></i>
+      </a>
+
+      <div class="dropdown-content">
+        <div class="menu-column">
+          <h5>Calçados</h5>
+          <a href="#">Tênis Feminino</a>
+          <a href="#">Corrida</a>
+          <a href="#">Lifestyle</a>
+        </div>
+
+        <div class="menu-column">
+          <h5>Roupas</h5>
+          <a href="#">Leggings</a>
+          <a href="#">Tops Fitness</a>
+          <a href="#">Jaquetas</a>
+        </div>
+
+        <div class="menu-banner">
+          <span>Nova Linha</span>
+          <strong>Women Fit</strong>
+          <a href="#">Descobrir →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFANTIL -->
+    <div class="dropdown">
+      <a href="#">
+        <i class="fa-solid fa-child-reaching"></i>
+        Infantil
+        <i class="fa-solid fa-chevron-down"></i>
+      </a>
+
+      <div class="dropdown-content">
+        <div class="menu-column">
+          <h5>Kids</h5>
+          <a href="#">Tênis Infantil</a>
+          <a href="#">Roupas Esportivas</a>
+          <a href="#">Conjuntos</a>
+          <a href="#">Mochilas</a>
+        </div>
+
+        <div class="menu-column">
+          <h5>Acessórios</h5>
+          <a href="#">Bonés</a>
+          <a href="#">Garrafas</a>
+          <a href="#">Meias</a>
+        </div>
+
+        <div class="menu-banner">
+          <span>Kids Sport</span>
+          <strong>Play Fast</strong>
+          <a href="#">Ver coleção →</a>
+        </div>
+      </div>
+    </div>
+
+  </nav>
+
+  <!-- PESQUISA -->
+  <div class="search-box">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input
+      type="search"
+      id="product-search"
+      placeholder="Pesquisar produtos..."
+      aria-label="Pesquisar produtos"
+    >
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h2>ELECTRIC<br>VELOCITY</h2>
+    <p>O futuro da performance chegou. Conheça a linha de amortecimento Volt-Reaction.</p>
+    <a href="#" class="btn-main">Shop Collection</a>
+  </div>
+</section>
+
+<section class="shop-section">
+  <div class="section-header">
+    <h3>Drops de Hoje</h3>
+  </div>
+
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="img-container" style="background-image:url('https://acdn-us.mitiendanube.com/stores/001/051/631/products/b746c61e1d76daf8a53bd1549aeb2c6a-075373b7aaac9d701f17751484827018-480-0.webp');"></div>
+      <div class="product-info">
+        <h4>Puma Performance Tee</h4>
+        <p>Camisa esportiva Puma</p>
+        <div class="price">R$ 149,90</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="img-container" style="background-image:url('https://cdn.xxl.no/filespin/0a58c55b0c4841a38f5cc00082766c29');"></div>
+      <div class="product-info">
+        <h4>Asics Run Short</h4>
+        <p>Short de performance Asics</p>
+        <div class="price">R$ 119,90</div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="img-container" style="background-image:url('https://images.tcdn.com.br/img/img_prod/1243702/bone_adidas_baseball_3_listras_azul_marinho_ii3510_9277_1_3916d60cd45c032289aff07b38d7e147.jpg');"></div>
+      <div class="product-info">
+        <h4>Adidas Street Cap</h4>
+        <p>Boné casual Adidas</p>
+        <div class="price">R$ 89,90</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="logo footer-logo">ARQUE<span>SPORTS</span></div>
+  <p style="color:#444;font-size:12px;letter-spacing:2px;">
+    © 2026 ARQUESPORTS BRASIL - ALL RIGHTS RESERVED.
+  </p>
+</footer>
+
+<script>
+  // Pesquisa os produtos pelo nome ou descrição.
+  const searchInput = document.getElementById("product-search");
+  const productCards = document.querySelectorAll(".product-card");
+
+  searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.trim().toLowerCase();
+
+    productCards.forEach((card) => {
+      const productText = card.textContent.toLowerCase();
+      card.style.display = productText.includes(searchTerm) ? "" : "none";
+    });
+  });
+</script>
+
+</body>
+</html>
