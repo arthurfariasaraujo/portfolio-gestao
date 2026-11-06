@@ -11,6 +11,117 @@
 
   <link rel="stylesheet" href="css/style.css">
   <script defer src="js/main.js"></script>
+
+  <style>
+    /* SEÇÃO DE PROJETOS EM EXCEL */
+
+    .excel-section {
+      padding: 90px 0;
+      background: #0d111b;
+    }
+
+    .excel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .excel-card {
+      background: #151b29;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .excel-card:hover {
+      transform: translateY(-6px);
+      border-color: #1677ff;
+    }
+
+    .excel-image {
+      width: 100%;
+      height: 210px;
+      background: #101827;
+      overflow: hidden;
+    }
+
+    .excel-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .excel-content {
+      padding: 24px;
+    }
+
+    .excel-label {
+      color: #398aff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .excel-content h3 {
+      color: #fff;
+      font-size: 20px;
+      margin: 12px 0;
+    }
+
+    .excel-content p {
+      color: #aab2c0;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .excel-tech {
+      display: inline-block;
+      color: #398aff;
+      background: rgba(22,119,255,0.12);
+      padding: 7px 11px;
+      border-radius: 5px;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .excel-button {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: #1677ff;
+      color: #fff;
+      padding: 12px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    .excel-button:hover {
+      background: #095bc9;
+    }
+
+    .excel-empty {
+      color: #aab2c0;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .excel-section {
+        padding: 60px 0;
+      }
+
+      .excel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -28,6 +139,7 @@
         <a href="#inicio">Início</a>
         <a href="#competencias">Sobre</a>
         <a href="#projetos">Projetos</a>
+        <a href="#projetos-excel">Excel</a>
         <a href="#contato">Contato</a>
       </nav>
     </div>
@@ -35,6 +147,7 @@
 
   <main>
 
+    <!-- INÍCIO -->
     <section class="hero" id="inicio">
       <div class="container hero-grid">
 
@@ -45,8 +158,8 @@
           </p>
 
           <h1>
-          Olá, eu sou <span class="gradient-text">Arthur Farias.</span><br>
-          Transformando ideias em soluções digitais que agregam no mercado.
+            Olá, eu sou <span class="gradient-text">Arthur Farias.</span><br>
+            Transformando ideias em soluções digitais que agregam no mercado.
           </h1>
 
           <p class="hero-lead">
@@ -96,6 +209,7 @@
       </div>
     </section>
 
+    <!-- COMPETÊNCIAS -->
     <section class="section section-soft" id="competencias">
       <div class="container">
 
@@ -129,6 +243,7 @@
       </div>
     </section>
 
+    <!-- PROJETOS DE DESENVOLVIMENTO -->
     <section class="section" id="projetos">
       <div class="container">
 
@@ -140,7 +255,6 @@
 
         <div class="project-grid">
 
-          <!-- PROJETO 1: SISTEMA DE GESTÃO -->
           <article class="project-card">
             <div class="project-visual visual-0">
               <span class="project-code">01 / WEB</span>
@@ -167,7 +281,6 @@
             </div>
           </article>
 
-          <!-- PROJETO 2: ARQUESPORTS -->
           <article class="project-card">
             <div class="project-visual visual-0">
               <span class="project-code">02 / E-COMMERCE</span>
@@ -196,6 +309,116 @@
       </div>
     </section>
 
+    <!-- PROJETOS EM EXCEL -->
+    <section class="excel-section" id="projetos-excel">
+      <div class="container">
+
+        <div class="section-heading">
+          <p class="eyebrow">ANÁLISE DE DADOS</p>
+          <h2>Projetos em <span class="gradient-text">Excel</span></h2>
+          <p>
+            Planilhas desenvolvidas para organização, tratamento,
+            análise de dados e automação de processos.
+          </p>
+        </div>
+
+        <div class="excel-grid">
+
+          <!-- PLANILHA 1 -->
+          <article class="excel-card">
+
+            <div class="excel-image">
+              <img src="imagens/dashboard-vendas.png"
+                   alt="Imagem do projeto Dashboard de Vendas"
+                   loading="lazy">
+            </div>
+
+            <div class="excel-content">
+              <span class="excel-label">EXCEL / PROJETO 01</span>
+
+              <h3>Dashboard de Vendas</h3>
+
+              <p>
+                Painel de análise de vendas com indicadores,
+                gráficos e acompanhamento de resultados.
+              </p>
+
+              <span class="excel-tech">Excel Avançado</span>
+
+              <a class="excel-button"
+                 href="planilhas/dashboard-vendas.xlsx"
+                 download>
+                Baixar planilha ↓
+              </a>
+            </div>
+
+          </article>
+
+          <!-- PLANILHA 2 -->
+          <article class="excel-card">
+
+            <div class="excel-image">
+              <img src="imagens/controle-financeiro.png"
+                   alt="Imagem do projeto Controle Financeiro"
+                   loading="lazy">
+            </div>
+
+            <div class="excel-content">
+              <span class="excel-label">EXCEL / PROJETO 02</span>
+
+              <h3>Controle Financeiro</h3>
+
+              <p>
+                Ferramenta para organização de receitas,
+                despesas e acompanhamento financeiro.
+              </p>
+
+              <span class="excel-tech">Excel Avançado</span>
+
+              <a class="excel-button"
+                 href="planilhas/controle-financeiro.xlsx"
+                 download>
+                Baixar planilha ↓
+              </a>
+            </div>
+
+          </article>
+
+          <!-- PLANILHA 3: EXCEL AVANÇADO -->
+          <article class="excel-card">
+
+            <div class="excel-image">
+              <span class="project-code">EXCEL AVANÇADO</span>
+            </div>
+
+            <div class="excel-content">
+              <span class="excel-label">EXCEL / PROJETO 03</span>
+
+              <h3>Excel Avançado</h3>
+
+              <p>
+                Planilha demonstrativa com recursos de Excel avançado,
+                organização de informações e análise de dados.
+              </p>
+
+              <span class="excel-tech">Excel Avançado</span>
+
+              <a class="excel-button"
+                 href="planilhas/excel-avancado.xlsx"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                Abrir planilha ↗
+              </a>
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTATO -->
     <section class="cta-section" id="contato">
       <div class="container cta-inner">
         <div>
@@ -224,6 +447,7 @@
 
   </main>
 
+  <!-- RODAPÉ -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <p>© <span id="year"></span> Arthur Farias. Desenvolvido com HTML, CSS, JavaScript, Python e MySQL.</p>
