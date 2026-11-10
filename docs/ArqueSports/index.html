@@ -38,7 +38,7 @@ header{
   width:100%;
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  justify-space-between;
   padding:25px 5%;
   background:rgba(0,0,0,0.95);
   border-bottom:1px solid #111;
@@ -374,6 +374,74 @@ nav{
   font-size:18px;
 }
 
+/* SEÇÃO QUEM SOMOS (PARTE INFERIOR) */
+.about-section{
+  padding:90px 5%;
+  background:var(--dark-gray);
+  border-top:1px solid var(--gray-border);
+  border-bottom:1px solid var(--gray-border);
+}
+
+.about-container{
+  max-width:1100px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+.about-text h3{
+  font-size:36px;
+  text-transform:uppercase;
+  font-weight:900;
+  margin-bottom:20px;
+}
+
+.about-text h3 span{
+  color:var(--electric-blue);
+}
+
+.about-text p{
+  font-family:Arial,sans-serif;
+  font-size:16px;
+  line-height:1.8;
+  color:#ccc;
+  margin-bottom:25px;
+}
+
+.about-features{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.feature-item{
+  background:var(--card-bg);
+  padding:20px;
+  border-radius:10px;
+  border:1px solid var(--gray-border);
+}
+
+.feature-item i{
+  font-size:24px;
+  color:var(--electric-blue);
+  margin-bottom:10px;
+}
+
+.feature-item h5{
+  font-size:14px;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+
+.feature-item p{
+  font-size:12px;
+  color:#888;
+  margin-bottom:0;
+  line-height:1.4;
+}
+
 /* MODAL DE CHECKOUT / PAGAMENTO */
 .checkout-modal{
   position:fixed;
@@ -630,15 +698,51 @@ nav{
 
 /* FOOTER */
 footer{
-  padding:80px 5% 40px;
+  padding:60px 5% 40px;
   border-top:1px solid #222;
-  text-align:center;
 }
 
-.footer-logo{
-  font-size:40px;
-  margin-bottom:20px;
-  opacity:.5;
+.footer-content{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:40px;
+  margin-bottom:40px;
+}
+
+.footer-brand p{
+  font-family:Arial,sans-serif;
+  font-size:14px;
+  color:#777;
+  margin-top:10px;
+  max-width:350px;
+  line-height:1.6;
+}
+
+.footer-col h5{
+  font-size:14px;
+  text-transform:uppercase;
+  color:var(--electric-blue);
+  margin-bottom:15px;
+}
+
+.footer-col a{
+  display:block;
+  color:#aaa;
+  text-decoration:none;
+  font-family:Arial,sans-serif;
+  font-size:13px;
+  margin-bottom:8px;
+  transition:.3s;
+}
+
+.footer-col a:hover{
+  color:#fff;
+}
+
+.footer-bottom{
+  text-align:center;
+  padding-top:30px;
+  border-top:1px solid #1a1a1a;
 }
 
 /* RESPONSIVO */
@@ -672,7 +776,7 @@ footer{
     min-height:180px;
   }
 
-  .checkout-grid{
+  .checkout-grid, .about-container, .footer-content{
     grid-template-columns:1fr;
   }
 }
@@ -720,6 +824,10 @@ footer{
 
   .checkout-container{
     padding:20px;
+  }
+
+  .about-features{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -920,6 +1028,33 @@ footer{
   </div>
 </section>
 
+<!-- SEÇÃO QUEM SOMOS -->
+<section class="about-section" id="quem-somos">
+  <div class="about-container">
+    <div class="about-text">
+      <h3>Quem <span>Somos</span></h3>
+      <p>
+        A <strong>ArqueSports</strong> é uma loja esportiva de alta performance que agrega diversas marcas consagradas em um só lugar. Nosso foco é priorizar a melhor escolha para você, entregando uma enorme variedade de opções para facilitar ao máximo a sua experiência de consumo e alta performance.
+      </p>
+      <div class="about-features">
+        <div class="feature-item">
+          <i class="fa-solid fa-layer-group"></i>
+          <h5>Multimarcas</h5>
+          <p>As melhores marcas globais reunidas num só ecossistema.</p>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-truck-fast"></i>
+          <h5>Entrega Expressa</h5>
+          <p>Envio prioritário para todo o Brasil com rastreio total.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-banner" style="background:linear-gradient(135deg, rgba(0,51,255,0.2), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1517649763962-0c623266010b?q=80&w=1000') center/cover; border-radius:16px; min-height:300px; border:1px solid var(--gray-border);">
+    </div>
+  </div>
+</section>
+
 <!-- MODAL CHECKOUT DE PAGAMENTO -->
 <div class="checkout-modal" id="checkoutModal">
   <div class="checkout-container">
@@ -1004,10 +1139,34 @@ footer{
 
 <!-- FOOTER -->
 <footer>
-  <div class="logo footer-logo">ARQUE<span>SPORTS</span></div>
-  <p style="color:#444;font-size:12px;letter-spacing:2px;">
-    © 2026 ARQUESPORTS BRASIL - ALL RIGHTS RESERVED.
-  </p>
+  <div class="footer-content">
+    <div class="footer-brand">
+      <div class="logo">ARQUE<span>SPORTS</span></div>
+      <p>Conectando atletas e entusiastas às melhores marcas esportivas do planeta com velocidade e autenticidade.</p>
+    </div>
+
+    <div class="footer-col">
+      <h5>Institucional</h5>
+      <a href="#quem-somos">Quem Somos</a>
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Termos de Uso</a>
+      <a href="#">Trabalhe Conosco</a>
+    </div>
+
+    <div class="footer-col">
+      <h5>Ajuda & Suporte</h5>
+      <a href="#">Fale Conosco</a>
+      <a href="#">Troca e Devoluções</a>
+      <a href="#">Prazos de Entrega</a>
+      <a href="#">Rastrear Pedido</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p style="color:#444;font-size:12px;letter-spacing:2px;">
+      © 2026 ARQUESPORTS BRASIL - ALL RIGHTS RESERVED.
+    </p>
+  </div>
 </footer>
 
 <script>
