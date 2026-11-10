@@ -38,27 +38,38 @@ header{
   width:100%;
   display:flex;
   align-items:center;
-  justify-space-between;
+  justify-content:space-between;
   padding:25px 5%;
   background:rgba(0,0,0,0.95);
   border-bottom:1px solid #111;
   z-index:1000;
 }
 
-/* LOGO */
+/* LOGO (ALINHADO À ESQUERDA) */
 .logo{
   font-size:28px;
   font-weight:900;
   letter-spacing:-2px;
   text-transform:uppercase;
   cursor:pointer;
+  white-space:nowrap;
 }
 
 .logo span{
   color:var(--electric-blue);
 }
 
-/* BARRA DE PESQUISA */
+/* NAV (CENTRALIZADO) */
+nav{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:35px;
+}
+
+/* BARRA DE PESQUISA (POSICIONADA NO CANTO DIREITO SUPERIOR) */
 .search-box{
   display:flex;
   align-items:center;
@@ -70,6 +81,7 @@ header{
   background:#101010;
   color:#aaa;
   z-index:2;
+  margin-left:auto; /* Empurra a barra para o canto direito */
 }
 
 .search-box i{
@@ -90,16 +102,6 @@ header{
 
 .search-box input::placeholder{
   color:#777;
-}
-
-/* NAV */
-nav{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  align-items:center;
-  gap:35px;
 }
 
 /* DROPDOWN */
@@ -374,7 +376,7 @@ nav{
   font-size:18px;
 }
 
-/* SEÇÃO QUEM SOMOS (PARTE INFERIOR) */
+/* SEÇÃO QUEM SOMOS */
 .about-section{
   padding:90px 5%;
   background:var(--dark-gray);
@@ -969,7 +971,7 @@ footer{
     </div>
   </nav>
 
-  <!-- PESQUISA -->
+  <!-- PESQUISA (POSICIONADO NO CANTO SUPERIOR DIREITO) -->
   <div class="search-box">
     <i class="fa-solid fa-magnifying-glass"></i>
     <input
