@@ -232,18 +232,41 @@ nav{
   color:var(--electric-blue);
 }
 
-/* HERO */
+/* HERO COM CARROSSEL */
 .hero{
   height:90vh;
-  background:
-    linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
-    url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070');
+  position:relative;
+  isolation:isolate;
   background-size:cover;
   background-position:center;
   display:flex;
   align-items:center;
   padding:0 5%;
   margin-top:90px;
+  overflow:hidden;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+    var(--hero-image);
+  background-size:cover;
+  background-position:center;
+  opacity:1;
+  transition:opacity .8s ease-in-out;
+}
+
+.hero.is-changing::before{
+  opacity:0;
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
 }
 
 .hero-content h2{
@@ -586,7 +609,8 @@ footer{
   </div>
 </header>
 
-<section class="hero">
+<!-- BANNER CENTRAL -->
+<section class="hero" style="--hero-image:url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070');">
   <div class="hero-content">
     <h2>ELECTRIC<br>VELOCITY</h2>
     <p>O futuro da performance chegou. Conheça a linha de amortecimento Volt-Reaction.</p>
@@ -594,6 +618,7 @@ footer{
   </div>
 </section>
 
+<!-- PRODUTOS -->
 <section class="shop-section">
   <div class="section-header">
     <h3>Drops de Hoje</h3>
@@ -631,6 +656,7 @@ footer{
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="logo footer-logo">ARQUE<span>SPORTS</span></div>
   <p style="color:#444;font-size:12px;letter-spacing:2px;">
@@ -639,7 +665,35 @@ footer{
 </footer>
 
 <script>
-  // Pesquisa os produtos pelo nome ou descrição.
+  // CARROSSEL: 3 imagens, 5 segundos cada.
+  const hero = document.querySelector(".hero");
+
+  const heroImages = [
+    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070",
+    "https://images.unsplash.com/photo-1539185441755-769473a23570?q=80&w=2070",
+    "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=2070"
+  ];
+
+  let currentHeroImage = 0;
+
+  setInterval(() => {
+    hero.classList.add("is-changing");
+
+    setTimeout(() => {
+      currentHeroImage = (currentHeroImage + 1) % heroImages.length;
+
+      hero.style.setProperty(
+        "--hero-image",
+        `url("${heroImages[currentHeroImage]}")`
+      );
+
+      hero.classList.remove("is-changing");
+    }, 800);
+
+  }, 5000);
+
+
+  // PESQUISA DE PRODUTOS
   const searchInput = document.getElementById("product-search");
   const productCards = document.querySelectorAll(".product-card");
 
@@ -648,6 +702,7 @@ footer{
 
     productCards.forEach((card) => {
       const productText = card.textContent.toLowerCase();
+
       card.style.display = productText.includes(searchTerm) ? "" : "none";
     });
   });
