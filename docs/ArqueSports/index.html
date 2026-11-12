@@ -1,1303 +1,144 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARQUESPORTS | ELECTRIC VOLT</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-<style>
-:root{
-  --black:#000;
-  --electric-blue:#0033FF;
-  --dark-gray:#111;
-  --card-bg:#161616;
-  --white:#fff;
-  --gray-border:#292929;
-}
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Arial Black","Arial",sans-serif;
-}
-
-body{
-  background:var(--black);
-  color:var(--white);
-  overflow-x:hidden;
-}
-
-/* HEADER FIXO */
-header{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:25px 5%;
-  background:rgba(0,0,0,0.95);
-  border-bottom:1px solid #111;
-  z-index:1000;
-}
-
-/* LOGO (ALINHADO À ESQUERDA) */
-.logo{
-  font-size:28px;
-  font-weight:900;
-  letter-spacing:-2px;
-  text-transform:uppercase;
-  cursor:pointer;
-  white-space:nowrap;
-}
-
-.logo span{
-  color:var(--electric-blue);
-}
-
-/* NAV (CENTRALIZADO) */
-nav{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  align-items:center;
-  gap:35px;
-}
-
-/* BARRA DE PESQUISA (POSICIONADA NO CANTO DIREITO SUPERIOR) */
-.search-box{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  width:230px;
-  padding:10px 14px;
-  border:1px solid var(--gray-border);
-  border-radius:30px;
-  background:#101010;
-  color:#aaa;
-  z-index:2;
-  margin-left:auto; /* Empurra a barra para o canto direito */
-}
-
-.search-box i{
-  color:var(--electric-blue);
-  font-size:14px;
-}
-
-.search-box input{
-  width:100%;
-  min-width:0;
-  border:0;
-  outline:0;
-  background:transparent;
-  color:#fff;
-  font-family:Arial,sans-serif;
-  font-size:13px;
-}
-
-.search-box input::placeholder{
-  color:#777;
-}
-
-/* DROPDOWN */
-.dropdown{
-  position:relative;
-}
-
-.dropdown > a{
-  color:#fff;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:30px 0;
-  transition:.3s;
-}
-
-.dropdown > a i:last-child{
-  font-size:11px;
-  transition:transform .3s ease;
-}
-
-.dropdown:hover > a{
-  color:var(--electric-blue);
-}
-
-.dropdown:hover > a i:last-child{
-  transform:rotate(180deg);
-}
-
-/* MEGA MENU */
-.dropdown-content{
-  position:absolute;
-  top:100%;
-  left:50%;
-  transform:translateX(-50%) translateY(20px);
-  width:720px;
-  max-width:92vw;
-  background:rgba(10,10,10,.98);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:18px;
-  padding:35px;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:30px;
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-  box-shadow:0 30px 80px rgba(0,0,0,.7);
-  transition:.35s ease;
-  z-index:999;
-}
-
-.dropdown:hover .dropdown-content{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-  transform:translateX(-50%) translateY(0);
-}
-
-.menu-column h5{
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  color:var(--electric-blue);
-  margin-bottom:15px;
-}
-
-.menu-column a{
-  display:block;
-  color:#d8d8d8;
-  text-decoration:none;
-  font-family:Arial,sans-serif;
-  font-size:14px;
-  padding:8px 0;
-  transition:.25s;
-}
-
-.menu-column a:hover{
-  color:#fff;
-  transform:translateX(6px);
-}
-
-.menu-banner{
-  background:
-    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.75)),
-    url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200');
-  background-size:cover;
-  background-position:center;
-  border-radius:14px;
-  min-height:220px;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:20px;
-}
-
-.menu-banner span{
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:#9bb0ff;
-}
-
-.menu-banner strong{
-  display:block;
-  margin:6px 0 12px;
-  font-size:22px;
-  line-height:1;
-  text-transform:uppercase;
-}
-
-.menu-banner a{
-  color:#fff;
-  text-decoration:none;
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.menu-banner a:hover{
-  color:var(--electric-blue);
-}
-
-/* HERO COM CARROSSEL */
-.hero{
-  height:90vh;
-  position:relative;
-  isolation:isolate;
-  background-size:cover;
-  background-position:center;
-  display:flex;
-  align-items:center;
-  padding:0 5%;
-  margin-top:90px;
-  overflow:hidden;
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-1;
-  background-image:
-    linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
-    var(--hero-image);
-  background-size:cover;
-  background-position:center;
-  opacity:1;
-  transition:opacity .8s ease-in-out;
-}
-
-.hero.is-changing::before{
-  opacity:0;
-}
-
-.hero-content{
-  position:relative;
-  z-index:1;
-}
-
-.hero-content h2{
-  font-size:85px;
-  line-height:.8;
-  text-transform:uppercase;
-  margin-bottom:20px;
-  font-weight:900;
-  font-style:italic;
-}
-
-.hero-content p{
-  font-size:18px;
-  font-family:Arial,sans-serif;
-  margin-bottom:30px;
-  max-width:500px;
-  line-height:1.6;
-}
-
-.btn-main{
-  background:var(--white);
-  color:var(--black);
-  padding:18px 45px;
-  text-decoration:none;
-  font-weight:900;
-  text-transform:uppercase;
-  display:inline-block;
-  transition:.3s;
-  border:none;
-  cursor:pointer;
-}
-
-.btn-main:hover{
-  background:var(--electric-blue);
-  color:var(--white);
-  box-shadow:0 0 30px rgba(0,51,255,0.6);
-}
-
-/* SHOP */
-.shop-section{
-  padding:100px 5%;
-}
-
-.section-header{
-  margin-bottom:40px;
-}
-
-.section-header h3{
-  font-size:40px;
-  text-transform:uppercase;
-  font-weight:900;
-}
-
-.product-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:20px;
-}
-
-.product-card{
-  background:var(--dark-gray);
-  transition:.4s;
-  cursor:pointer;
-  overflow:hidden;
-  position:relative;
-}
-
-.product-card:hover{
-  transform:scale(1.02);
-  box-shadow:0 10px 40px rgba(0,51,255,0.3);
-}
-
-.img-container{
-  width:100%;
-  height:400px;
-  background-size:cover;
-  background-position:center;
-  transition:.4s;
-}
-
-.product-card:hover .img-container{
-  transform:scale(1.05);
-}
-
-.product-info{
-  padding:20px;
-}
-
-.product-info h4{
-  font-size:20px;
-  text-transform:uppercase;
-  margin-bottom:5px;
-}
-
-.product-info p{
-  color:#777;
-  font-family:Arial,sans-serif;
-}
-
-.price{
-  margin-top:10px;
-  color:var(--electric-blue);
-  font-weight:900;
-  font-size:18px;
-}
-
-/* SEÇÃO QUEM SOMOS */
-.about-section{
-  padding:90px 5%;
-  background:var(--dark-gray);
-  border-top:1px solid var(--gray-border);
-  border-bottom:1px solid var(--gray-border);
-}
-
-.about-container{
-  max-width:1100px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:50px;
-  align-items:center;
-}
-
-.about-text h3{
-  font-size:36px;
-  text-transform:uppercase;
-  font-weight:900;
-  margin-bottom:20px;
-}
-
-.about-text h3 span{
-  color:var(--electric-blue);
-}
-
-.about-text p{
-  font-family:Arial,sans-serif;
-  font-size:16px;
-  line-height:1.8;
-  color:#ccc;
-  margin-bottom:25px;
-}
-
-.about-features{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-}
-
-.feature-item{
-  background:var(--card-bg);
-  padding:20px;
-  border-radius:10px;
-  border:1px solid var(--gray-border);
-}
-
-.feature-item i{
-  font-size:24px;
-  color:var(--electric-blue);
-  margin-bottom:10px;
-}
-
-.feature-item h5{
-  font-size:14px;
-  text-transform:uppercase;
-  margin-bottom:6px;
-}
-
-.feature-item p{
-  font-size:12px;
-  color:#888;
-  margin-bottom:0;
-  line-height:1.4;
-}
-
-/* MODAL DE CHECKOUT / PAGAMENTO */
-.checkout-modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.85);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  z-index:2000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  opacity:0;
-  visibility:hidden;
-  transition:all .3s ease;
-}
-
-.checkout-modal.active{
-  opacity:1;
-  visibility:visible;
-}
-
-.checkout-container{
-  background:var(--dark-gray);
-  border:1px solid var(--gray-border);
-  border-radius:16px;
-  width:100%;
-  max-width:900px;
-  max-height:90vh;
-  overflow-y:auto;
-  position:relative;
-  padding:35px;
-  box-shadow:0 25px 50px rgba(0,0,0,0.8);
-}
-
-.close-modal{
-  position:absolute;
-  top:20px;
-  right:25px;
-  background:transparent;
-  border:none;
-  color:#888;
-  font-size:24px;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.close-modal:hover{
-  color:var(--electric-blue);
-}
-
-.checkout-title{
-  font-size:26px;
-  text-transform:uppercase;
-  margin-bottom:25px;
-  border-bottom:1px solid var(--gray-border);
-  padding-bottom:15px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.checkout-title i{
-  color:var(--electric-blue);
-}
-
-.checkout-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:30px;
-}
-
-/* RESUMO DO PRODUTO NO CHECKOUT */
-.order-summary{
-  background:var(--card-bg);
-  padding:20px;
-  border-radius:12px;
-  border:1px solid var(--gray-border);
-  height:fit-content;
-}
-
-.order-summary h4{
-  font-size:14px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  color:var(--electric-blue);
-  margin-bottom:15px;
-}
-
-.summary-product{
-  display:flex;
-  gap:15px;
-  margin-bottom:20px;
-  align-items:center;
-}
-
-.summary-img{
-  width:80px;
-  height:80px;
-  border-radius:8px;
-  background-size:cover;
-  background-position:center;
-  border:1px solid var(--gray-border);
-}
-
-.summary-details h5{
-  font-size:16px;
-  text-transform:uppercase;
-  margin-bottom:4px;
-}
-
-.summary-details p{
-  font-family:Arial,sans-serif;
-  font-size:13px;
-  color:#888;
-}
-
-.summary-price{
-  color:var(--electric-blue);
-  font-weight:900;
-  margin-top:6px;
-  font-size:16px;
-}
-
-.total-row{
-  display:flex;
-  justify-content:space-between;
-  padding-top:15px;
-  border-top:1px solid var(--gray-border);
-  font-size:16px;
-  font-weight:900;
-}
-
-/* FORMULÁRIO DE CHECKOUT */
-.form-group{
-  margin-bottom:16px;
-}
-
-.form-group label{
-  display:block;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  margin-bottom:8px;
-  color:#aaa;
-}
-
-.form-group input, .form-group select{
-  width:100%;
-  padding:14px;
-  background:#090909;
-  border:1px solid var(--gray-border);
-  border-radius:8px;
-  color:#fff;
-  font-family:Arial,sans-serif;
-  font-size:14px;
-  outline:none;
-  transition:.3s;
-}
-
-.form-group input:focus, .form-group select:focus{
-  border-color:var(--electric-blue);
-  box-shadow:0 0 10px rgba(0,51,255,0.2);
-}
-
-.form-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-/* OPÇÕES DE PAGAMENTO */
-.payment-methods{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-bottom:20px;
-}
-
-.payment-btn{
-  background:#090909;
-  border:1px solid var(--gray-border);
-  padding:12px;
-  border-radius:8px;
-  color:#fff;
-  cursor:pointer;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
-  font-size:12px;
-  font-weight:800;
-  text-transform:uppercase;
-  transition:.3s;
-}
-
-.payment-btn i{
-  font-size:20px;
-  color:#777;
-}
-
-.payment-btn.active{
-  border-color:var(--electric-blue);
-  background:rgba(0,51,255,0.1);
-}
-
-.payment-btn.active i{
-  color:var(--electric-blue);
-}
-
-.payment-details-box{
-  background:#090909;
-  padding:15px;
-  border-radius:8px;
-  border:1px solid var(--gray-border);
-  margin-bottom:20px;
-}
-
-.pix-box{
-  text-align:center;
-}
-
-.pix-box p{
-  font-family:Arial,sans-serif;
-  font-size:13px;
-  color:#aaa;
-  margin-bottom:10px;
-}
-
-.pix-box span{
-  color:#00ff88;
-  font-weight:900;
-}
-
-.btn-submit-order{
-  width:100%;
-  padding:18px;
-  background:var(--electric-blue);
-  color:#fff;
-  border:none;
-  border-radius:8px;
-  font-size:15px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.btn-submit-order:hover{
-  background:#0022cc;
-  box-shadow:0 0 25px rgba(0,51,255,0.5);
-}
-
-/* FOOTER */
-footer{
-  padding:60px 5% 40px;
-  border-top:1px solid #222;
-}
-
-.footer-content{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr;
-  gap:40px;
-  margin-bottom:40px;
-}
-
-.footer-brand p{
-  font-family:Arial,sans-serif;
-  font-size:14px;
-  color:#777;
-  margin-top:10px;
-  max-width:350px;
-  line-height:1.6;
-}
-
-.footer-col h5{
-  font-size:14px;
-  text-transform:uppercase;
-  color:var(--electric-blue);
-  margin-bottom:15px;
-}
-
-.footer-col a{
-  display:block;
-  color:#aaa;
-  text-decoration:none;
-  font-family:Arial,sans-serif;
-  font-size:13px;
-  margin-bottom:8px;
-  transition:.3s;
-}
-
-.footer-col a:hover{
-  color:#fff;
-}
-
-.footer-bottom{
-  text-align:center;
-  padding-top:30px;
-  border-top:1px solid #1a1a1a;
-}
-
-/* RESPONSIVO */
-@media(max-width:900px){
-  header{
-    padding:18px 4%;
-    gap:14px;
-    flex-wrap:wrap;
-  }
-
-  nav{
-    position:static;
-    transform:none;
-    order:3;
-    width:100%;
-    justify-content:center;
-  }
-
-  .search-box{
-    width:190px;
-    margin-left:auto;
-  }
-
-  .dropdown-content{
-    width:95vw;
-    grid-template-columns:1fr;
-    padding:25px;
-  }
-
-  .menu-banner{
-    min-height:180px;
-  }
-
-  .checkout-grid, .about-container, .footer-content{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:768px){
-  header{
-    padding:14px 4%;
-  }
-
-  .logo{
-    font-size:23px;
-  }
-
-  .search-box{
-    width:170px;
-    padding:8px 11px;
-  }
-
-  nav{
-    position:static;
-    transform:none;
-    width:100%;
-    justify-content:flex-start;
-    overflow-x:auto;
-    gap:20px;
-  }
-
-  .dropdown-content{
-    left:0;
-    transform:translateY(20px);
-    width:320px;
-  }
-
-  .dropdown:hover .dropdown-content{
-    transform:translateY(0);
-  }
-
-  .hero-content h2{
-    font-size:50px;
-  }
-
-  .hero-content p{
-    font-size:16px;
-  }
-
-  .checkout-container{
-    padding:20px;
-  }
-
-  .about-features{
-    grid-template-columns:1fr;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ARQUESPORTS: tênis, roupas e acessórios esportivos das melhores marcas.">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <title>ARQUESPORTS | Electric Volt</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/hero.css">
 </head>
-
 <body>
+  <a class="skip-link" href="#produtos">Ir para os produtos</a>
 
-<header>
-  <div class="logo">ARQUE<span>SPORTS</span></div>
+  <header class="site-header has-nav">
+    <a class="logo" href="index.html" aria-label="ARQUESPORTS, página inicial">ARQUE<span>SPORTS</span></a>
 
-  <nav>
-    <!-- LANÇAMENTOS -->
-    <div class="dropdown">
-      <a href="#">
-        <i class="fa-solid fa-bolt"></i>
-        Lançamentos
-        <i class="fa-solid fa-chevron-down"></i>
-      </a>
+    <nav class="main-nav" id="main-nav" aria-label="Principal"></nav>
 
-      <div class="dropdown-content">
-        <div class="menu-column">
-          <h5>Novidades</h5>
-          <a href="#">Running</a>
-          <a href="#">Coleção Volt</a>
-          <a href="#">Tênis Elite</a>
-          <a href="#">Drops Limitados</a>
+    <form class="search" id="search-form" role="search">
+      <label class="sr-only" for="search-input">Buscar produtos pelo nome</label>
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <input id="search-input" type="search" placeholder="Buscar produtos" autocomplete="off">
+    </form>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="fav-toggle" type="button" aria-pressed="false" aria-label="Mostrar apenas favoritos">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10Z"/></svg>
+      </button>
+      <button class="icon-btn" id="cart-link" type="button" aria-label="Abrir carrinho, 0 itens">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+        <span class="cart-count" id="cart-count" hidden>0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero" aria-roledescription="carousel" aria-label="Destaques">
+      <h1 class="sr-only">ARQUESPORTS: tênis, roupas e acessórios esportivos</h1>
+      <div class="hero-slides" aria-live="off">
+      <div class="slide is-active" role="group" aria-roledescription="slide" aria-label="1 de 3">
+        <div class="slide-text">
+          <h2 class="slide-title">Electric<br>Velocity</h2>
+          <p>O futuro da performance chegou. Conheça a linha de amortecimento Volt-Reaction.</p>
+          <a class="btn btn-light" href="#produtos" data-go-category="calcados">Ver calçados</a>
         </div>
-
-        <div class="menu-column">
-          <h5>Destaques</h5>
-          <a href="#">Mais Vendidos</a>
-          <a href="#">Promoções</a>
-          <a href="#">Exclusivos</a>
-          <a href="#">Novos Drops</a>
+        <img class="slide-art" src="assets/img/volt-runner-elite.svg" alt="" width="800" height="1000">
+      </div>
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3" inert>
+        <div class="slide-text">
+          <h2 class="slide-title">Treino<br>sem limites</h2>
+          <p>Roupas leves, de secagem rápida e com liberdade total de movimento.</p>
+          <a class="btn btn-light" href="#produtos" data-go-category="roupas">Ver roupas</a>
         </div>
+        <img class="slide-art" src="assets/img/jaqueta-thermo.svg" alt="" width="800" height="1000">
+      </div>
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3" inert>
+        <div class="slide-text">
+          <h2 class="slide-title">Play<br>Fast</h2>
+          <p>Tênis, mochilas e acessórios para a criançada acompanhar o ritmo.</p>
+          <a class="btn btn-light" href="#produtos" data-go-audience="infantil">Linha infantil</a>
+        </div>
+        <img class="slide-art" src="assets/img/tenis-play-kids.svg" alt="" width="800" height="1000">
+      </div>
+      </div>
+      <div class="hero-controls">
+        <button class="hero-btn" id="hero-prev" type="button" aria-label="Slide anterior"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+        <button class="hero-btn" id="hero-next" type="button" aria-label="Próximo slide"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        <button class="hero-toggle" id="hero-toggle" type="button">Pausar</button>
+        <div class="hero-dots"></div>
+      </div>
+    </section>
 
-        <div class="menu-banner">
-          <span>Nova Coleção</span>
-          <strong>Electric Volt</strong>
-          <a href="#">Comprar agora →</a>
+    <section class="catalog" id="produtos" aria-labelledby="catalog-title">
+      <h2 id="catalog-title" tabindex="-1">Produtos</h2>
+
+      <div class="toolbar">
+        <div class="chips" id="category-chips" role="group" aria-label="Filtrar por categoria"></div>
+        <div class="filters">
+          <div class="field"><label for="filter-audience">Público</label><select id="filter-audience"></select></div>
+          <div class="field"><label for="filter-price">Preço</label><select id="filter-price"></select></div>
+          <div class="field"><label for="filter-sort">Ordenar por</label><select id="filter-sort"></select></div>
         </div>
       </div>
-    </div>
 
-    <!-- MASCULINO -->
-    <div class="dropdown">
-      <a href="#">
-        <i class="fa-solid fa-person"></i>
-        Masculino
-        <i class="fa-solid fa-chevron-down"></i>
-      </a>
+      <p class="status" id="result-status" role="status"></p>
+      <div class="grid" id="product-grid">
+        <noscript><p>Ative o JavaScript para ver os produtos.</p></noscript>
+      </div>
+    </section>
 
-      <div class="dropdown-content">
-        <div class="menu-column">
-          <h5>Calçados</h5>
-          <a href="#">Tênis Running</a>
-          <a href="#">Tênis Casual</a>
-          <a href="#">Academia</a>
-          <a href="#">Chinelos</a>
-        </div>
+    <section class="about" aria-labelledby="about-title">
+      <h2 id="about-title">Quem somos</h2>
+      <p>A ARQUESPORTS nasceu da paixão por performance, estilo e inovação.</p>
+      <p>Reunimos as melhores marcas esportivas do mercado para oferecer produtos que unem tecnologia, conforto e design.</p>
+    </section>
+  </main>
 
-        <div class="menu-column">
-          <h5>Roupas</h5>
-          <a href="#">Camisetas</a>
-          <a href="#">Shorts</a>
-          <a href="#">Jaquetas</a>
-          <a href="#">Conjuntos</a>
-        </div>
+  <footer class="site-footer">
+    <p>A ARQUESPORTS reúne as melhores marcas esportivas para unir tecnologia, conforto e design.</p>
+    <small>© 2026 ARQUESPORTS Brasil. Todos os direitos reservados.</small>
+  </footer>
 
-        <div class="menu-banner">
-          <span>Performance</span>
-          <strong>Men Pro</strong>
-          <a href="#">Explorar →</a>
+  <dialog class="drawer" id="cart-drawer" aria-labelledby="cart-title">
+    <div class="drawer-inner">
+      <div class="drawer-head">
+        <h2 id="cart-title" tabindex="-1">Seu carrinho</h2>
+        <button class="icon-btn" id="cart-close" type="button" aria-label="Fechar carrinho"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+      <div class="drawer-body">
+        <ul class="cart-list" id="cart-items"></ul>
+        <div class="cart-empty" id="cart-empty">
+          <p>Seu carrinho está vazio.</p>
+          <button class="btn btn-outline" id="cart-continue" type="button">Continuar comprando</button>
         </div>
       </div>
-    </div>
-
-    <!-- FEMININO -->
-    <div class="dropdown">
-      <a href="#">
-        <i class="fa-solid fa-person-dress"></i>
-        Feminino
-        <i class="fa-solid fa-chevron-down"></i>
-      </a>
-
-      <div class="dropdown-content">
-        <div class="menu-column">
-          <h5>Calçados</h5>
-          <a href="#">Tênis Feminino</a>
-          <a href="#">Corrida</a>
-          <a href="#">Lifestyle</a>
-        </div>
-
-        <div class="menu-column">
-          <h5>Roupas</h5>
-          <a href="#">Leggings</a>
-          <a href="#">Tops Fitness</a>
-          <a href="#">Jaquetas</a>
-        </div>
-
-        <div class="menu-banner">
-          <span>Nova Linha</span>
-          <strong>Women Fit</strong>
-          <a href="#">Descobrir →</a>
-        </div>
+      <div class="drawer-foot" id="cart-footer" hidden>
+        <p class="free-note" id="cart-free-note"></p>
+        <dl class="totals">
+          <div><dt>Subtotal</dt><dd id="cart-subtotal"></dd></div>
+          <div><dt>Frete</dt><dd id="cart-shipping"></dd></div>
+          <div class="totals-total"><dt>Total</dt><dd id="cart-total"></dd></div>
+        </dl>
+        <a class="btn btn-primary" href="checkout.html">Finalizar compra</a>
       </div>
     </div>
+  </dialog>
 
-    <!-- INFANTIL -->
-    <div class="dropdown">
-      <a href="#">
-        <i class="fa-solid fa-child-reaching"></i>
-        Infantil
-        <i class="fa-solid fa-chevron-down"></i>
-      </a>
-
-      <div class="dropdown-content">
-        <div class="menu-column">
-          <h5>Kids</h5>
-          <a href="#">Tênis Infantil</a>
-          <a href="#">Roupas Esportivas</a>
-          <a href="#">Conjuntos</a>
-          <a href="#">Mochilas</a>
-        </div>
-
-        <div class="menu-column">
-          <h5>Acessórios</h5>
-          <a href="#">Bonés</a>
-          <a href="#">Garrafas</a>
-          <a href="#">Meias</a>
-        </div>
-
-        <div class="menu-banner">
-          <span>Kids Sport</span>
-          <strong>Play Fast</strong>
-          <a href="#">Ver coleção →</a>
-        </div>
-      </div>
+  <dialog class="modal" id="product-dialog" aria-labelledby="detail-title">
+    <div class="modal-inner">
+      <button class="icon-btn modal-close" id="detail-close" type="button" aria-label="Fechar detalhes"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      <div id="detail-content"></div>
     </div>
-  </nav>
+  </dialog>
 
-  <!-- PESQUISA (POSICIONADO NO CANTO SUPERIOR DIREITO) -->
-  <div class="search-box">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input
-      type="search"
-      id="product-search"
-      placeholder="Pesquisar produtos..."
-      aria-label="Pesquisar produtos"
-    >
-  </div>
-</header>
-
-<!-- BANNER CENTRAL -->
-<section class="hero" style="--hero-image:url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070');">
-  <div class="hero-content">
-    <h2>ELECTRIC<br>VELOCITY</h2>
-    <p>O futuro da performance chegou. Conheça a linha de amortecimento Volt-Reaction.</p>
-    <a href="#" class="btn-main">Shop Collection</a>
-  </div>
-</section>
-
-<!-- PRODUTOS -->
-<section class="shop-section">
-  <div class="section-header">
-    <h3>Drops de Hoje</h3>
-  </div>
-
-  <div class="product-grid">
-
-    <div class="product-card" data-name="Jordan Performance Tee" data-desc="Camisa esportiva Jordan" data-price="R$ 149,90" data-img="https://acdn-us.mitiendanube.com/stores/001/051/631/products/b746c61e1d76daf8a53bd1549aeb2c6a-075373b7aaac9d701f17751484827018-480-0.webp">
-      <div class="img-container" style="background-image:url('https://acdn-us.mitiendanube.com/stores/001/051/631/products/b746c61e1d76daf8a53bd1549aeb2c6a-075373b7aaac9d701f17751484827018-480-0.webp');"></div>
-      <div class="product-info">
-        <h4>Jordan Performance Tee</h4>
-        <p>Camisa esportiva Jordan</p>
-        <div class="price">R$ 149,90</div>
-      </div>
-    </div>
-
-    <div class="product-card" data-name="Asics Run Short" data-desc="Short de performance Asics" data-price="R$ 119,90" data-img="https://cdn.xxl.no/filespin/0a58c55b0c4841a38f5cc00082766c29">
-      <div class="img-container" style="background-image:url('https://cdn.xxl.no/filespin/0a58c55b0c4841a38f5cc00082766c29');"></div>
-      <div class="product-info">
-        <h4>Asics Run Short</h4>
-        <p>Short de performance Asics</p>
-        <div class="price">R$ 119,90</div>
-      </div>
-    </div>
-
-    <div class="product-card" data-name="Adidas Street Cap" data-desc="Boné casual Adidas" data-price="R$ 89,90" data-img="https://images.tcdn.com.br/img/img_prod/1243702/bone_adidas_baseball_3_listras_azul_marinho_ii3510_9277_1_3916d60cd45c032289aff07b38d7e147.jpg">
-      <div class="img-container" style="background-image:url('https://images.tcdn.com.br/img/img_prod/1243702/bone_adidas_baseball_3_listras_azul_marinho_ii3510_9277_1_3916d60cd45c032289aff07b38d7e147.jpg');"></div>
-      <div class="product-info">
-        <h4>Adidas Street Cap</h4>
-        <p>Boné casual Adidas</p>
-        <div class="price">R$ 89,90</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- SEÇÃO QUEM SOMOS -->
-<section class="about-section" id="quem-somos">
-  <div class="about-container">
-    <div class="about-text">
-      <h3>Quem <span>Somos</span></h3>
-      <p>
-        A <strong>ArqueSports</strong> é uma loja esportiva de alta performance que agrega diversas marcas consagradas em um só lugar. Nosso foco é priorizar a melhor escolha para você, entregando uma enorme variedade de opções para facilitar ao máximo a sua experiência de consumo e alta performance.
-      </p>
-      <div class="about-features">
-        <div class="feature-item">
-          <i class="fa-solid fa-layer-group"></i>
-          <h5>Multimarcas</h5>
-          <p>As melhores marcas globais reunidas num só ecossistema.</p>
-        </div>
-        <div class="feature-item">
-          <i class="fa-solid fa-truck-fast"></i>
-          <h5>Entrega Expressa</h5>
-          <p>Envio prioritário para todo o Brasil com rastreio total.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="about-banner" style="background:linear-gradient(135deg, rgba(0,51,255,0.2), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1517649763962-0c623266010b?q=80&w=1000') center/cover; border-radius:16px; min-height:300px; border:1px solid var(--gray-border);">
-    </div>
-  </div>
-</section>
-
-<!-- MODAL CHECKOUT DE PAGAMENTO -->
-<div class="checkout-modal" id="checkoutModal">
-  <div class="checkout-container">
-    <button class="close-modal" id="closeModal">&times;</button>
-    
-    <div class="checkout-title">
-      <i class="fa-solid fa-shield-halved"></i>
-      Finalizar Pedido
-    </div>
-
-    <div class="checkout-grid">
-      <!-- ESQUERDA: FORMULÁRIO -->
-      <form id="checkoutForm" onsubmit="event.preventDefault(); alert('Pedido realizado com sucesso!'); document.getElementById('checkoutModal').classList.remove('active');">
-        
-        <div class="form-group">
-          <label for="cust-name">Nome Completo</label>
-          <input type="text" id="cust-name" placeholder="Digite seu nome completo" required>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="cust-phone">Telefone / WhatsApp</label>
-            <input type="tel" id="cust-phone" placeholder="(00) 00000-0000" required>
-          </div>
-          <div class="form-group">
-            <label for="cust-cep">CEP</label>
-            <input type="text" id="cust-cep" placeholder="00000-000" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="cust-address">Endereço de Entrega</label>
-          <input type="text" id="cust-address" placeholder="Rua, Número, Bairro" required>
-        </div>
-
-        <div class="form-group">
-          <label>Forma de Pagamento</label>
-          <div class="payment-methods">
-            <button type="button" class="payment-btn active" data-method="pix">
-              <i class="fa-brands fa-pix"></i> PIX
-            </button>
-            <button type="button" class="payment-btn" data-method="card">
-              <i class="fa-solid fa-credit-card"></i> Cartão
-            </button>
-            <button type="button" class="payment-btn" data-method="ticket">
-              <i class="fa-solid fa-barcode"></i> Boleto
-            </button>
-          </div>
-        </div>
-
-        <!-- DETALHES DINÂMICOS DE PAGAMENTO -->
-        <div class="payment-details-box" id="paymentDetails">
-          <div class="pix-box">
-            <p>Aprovação imediata + <span>5% de desconto</span></p>
-            <p style="font-size:11px; color:#666;">O QR Code será gerado após clicar em concluir.</p>
-          </div>
-        </div>
-
-        <button type="submit" class="btn-submit-order">Concluir Pedido</button>
-      </form>
-
-      <!-- DIREITA: RESUMO DO PEDIDO -->
-      <div class="order-summary">
-        <h4>Resumo do Item</h4>
-        <div class="summary-product">
-          <div class="summary-img" id="summaryImg"></div>
-          <div class="summary-details">
-            <h5 id="summaryTitle">Nome do Produto</h5>
-            <p id="summaryDesc">Descrição breve do item</p>
-            <div class="summary-price" id="summaryPrice">R$ 0,00</div>
-          </div>
-        </div>
-
-        <div class="total-row">
-          <span>Total a pagar:</span>
-          <span id="summaryTotal" style="color:var(--electric-blue);">R$ 0,00</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-content">
-    <div class="footer-brand">
-      <div class="logo">ARQUE<span>SPORTS</span></div>
-      <p>Conectando atletas e entusiastas às melhores marcas esportivas do planeta com velocidade e autenticidade.</p>
-    </div>
-
-    <div class="footer-col">
-      <h5>Institucional</h5>
-      <a href="#quem-somos">Quem Somos</a>
-      <a href="#">Política de Privacidade</a>
-      <a href="#">Termos de Uso</a>
-      <a href="#">Trabalhe Conosco</a>
-    </div>
-
-    <div class="footer-col">
-      <h5>Ajuda & Suporte</h5>
-      <a href="#">Fale Conosco</a>
-      <a href="#">Troca e Devoluções</a>
-      <a href="#">Prazos de Entrega</a>
-      <a href="#">Rastrear Pedido</a>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <p style="color:#444;font-size:12px;letter-spacing:2px;">
-      © 2026 ARQUESPORTS BRASIL - ALL RIGHTS RESERVED.
-    </p>
-  </div>
-</footer>
-
-<script>
-  // CARROSSEL: 3 imagens, 5 segundos cada.
-  const hero = document.querySelector(".hero");
-
-  const heroImages = [
-    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070",
-    "https://images.unsplash.com/photo-1539185441755-769473a23570?q=80&w=2070",
-    "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=2070"
-  ];
-
-  let currentHeroImage = 0;
-
-  setInterval(() => {
-    hero.classList.add("is-changing");
-
-    setTimeout(() => {
-      currentHeroImage = (currentHeroImage + 1) % heroImages.length;
-
-      hero.style.setProperty(
-        "--hero-image",
-        `url("${heroImages[currentHeroImage]}")`
-      );
-
-      hero.classList.remove("is-changing");
-    }, 800);
-
-  }, 5000);
-
-  // PESQUISA DE PRODUTOS
-  const searchInput = document.getElementById("product-search");
-  const productCards = document.querySelectorAll(".product-card");
-
-  searchInput.addEventListener("input", () => {
-    const searchTerm = searchInput.value.trim().toLowerCase();
-
-    productCards.forEach((card) => {
-      const productText = card.textContent.toLowerCase();
-
-      card.style.display = productText.includes(searchTerm) ? "" : "none";
-    });
-  });
-
-  // SISTEMA DE MODAL CHECKOUT DE PAGAMENTO
-  const checkoutModal = document.getElementById("checkoutModal");
-  const closeModal = document.getElementById("closeModal");
-  
-  const summaryImg = document.getElementById("summaryImg");
-  const summaryTitle = document.getElementById("summaryTitle");
-  const summaryDesc = document.getElementById("summaryDesc");
-  const summaryPrice = document.getElementById("summaryPrice");
-  const summaryTotal = document.getElementById("summaryTotal");
-
-  // ABRIR MODAL AO CLICAR EM UM PRODUTO DOS DROPS DE HOJE
-  productCards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const name = card.getAttribute("data-name");
-      const desc = card.getAttribute("data-desc");
-      const price = card.getAttribute("data-price");
-      const img = card.getAttribute("data-img");
-
-      summaryTitle.textContent = name;
-      summaryDesc.textContent = desc;
-      summaryPrice.textContent = price;
-      summaryTotal.textContent = price;
-      summaryImg.style.backgroundImage = `url('${img}')`;
-
-      checkoutModal.classList.add("active");
-    });
-  });
-
-  // FECHAR MODAL
-  closeModal.addEventListener("click", () => {
-    checkoutModal.classList.remove("active");
-  });
-
-  checkoutModal.addEventListener("click", (e) => {
-    if (e.target === checkoutModal) {
-      checkoutModal.classList.remove("active");
-    }
-  });
-
-  // SELEÇÃO DE FORMA DE PAGAMENTO DINÂMICA
-  const paymentBtns = document.querySelectorAll(".payment-btn");
-  const paymentDetails = document.getElementById("paymentDetails");
-
-  paymentBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      paymentBtns.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      const method = btn.getAttribute("data-method");
-
-      if(method === "pix"){
-        paymentDetails.innerHTML = `
-          <div class="pix-box">
-            <p>Aprovação imediata + <span>5% de desconto</span></p>
-            <p style="font-size:11px; color:#666;">O QR Code será gerado após clicar em concluir.</p>
-          </div>
-        `;
-      } else if(method === "card"){
-        paymentDetails.innerHTML = `
-          <div class="form-group" style="margin-bottom:10px;">
-            <label>Número do Cartão</label>
-            <input type="text" placeholder="0000 0000 0000 0000" required>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Validade</label>
-              <input type="text" placeholder="MM/AA" required>
-            </div>
-            <div class="form-group">
-              <label>CVV</label>
-              <input type="text" placeholder="123" required>
-            </div>
-          </div>
-        `;
-      } else if(method === "ticket"){
-        paymentDetails.innerHTML = `
-          <div class="pix-box">
-            <p>Vencimento em 3 dias úteis.</p>
-            <p style="font-size:11px; color:#666;">O boleto será gerado para download logo após o término.</p>
-          </div>
-        `;
-      }
-    });
-  });
-</script>
-
+  <div class="sr-only" id="cart-status" role="status"></div>
+  <script src="js/aviso-file.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

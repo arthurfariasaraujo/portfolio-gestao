@@ -1,0 +1,14 @@
+{
+  "name": "arquesports",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "placeholders": "node scripts/gerar-placeholders.mjs",
+    "test": "node scripts/verificar-fundacao.mjs && node scripts/verificar-catalogo.mjs && node scripts/verificar-favoritos.mjs && node scripts/verificar-validadores.mjs && node scripts/verificar-contraste.mjs && node scripts/verificar-estatico.mjs",
+    "test:dom": "node scripts/verificar-dom.mjs && node scripts/verificar-checkout-dom.mjs",
+    "fotos": "node scripts/aplicar-fotos.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "^26.0.0"
+  }
+}

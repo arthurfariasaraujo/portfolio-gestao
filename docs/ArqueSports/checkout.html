@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <title>Finalizar compra | ARQUESPORTS</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/checkout.css">
+</head>
+<body>
+  <header class="site-header checkout-header">
+    <a class="logo" href="index.html" aria-label="ARQUESPORTS, voltar à loja">ARQUE<span>SPORTS</span></a>
+    <a class="back-link" href="index.html">Continuar comprando</a>
+  </header>
+
+  <main id="checkout-main" class="checkout-main">
+    <div class="empty" id="empty-cart" hidden>
+      <h1>Seu carrinho está vazio</h1>
+      <p>Adicione produtos antes de finalizar a compra.</p>
+      <a class="btn btn-primary" href="index.html">Ver produtos</a>
+    </div>
+
+    <div class="checkout-grid" id="checkout-grid">
+      <form id="checkout-form" class="checkout-form" novalidate>
+        <h1>Finalizar compra</h1>
+        <p class="demo-note" role="note"><strong>Compra demonstrativa.</strong> Nenhuma cobrança é feita e nenhum dado é enviado ou salvo. Não digite dados reais de cartão: para testar, use 4111 1111 1111 1111, qualquer validade futura e qualquer CVV.</p>
+        <p class="form-summary" id="form-summary" role="alert" hidden></p>
+
+        <fieldset>
+          <legend>Seus dados</legend>
+          <div class="field-group">
+            <label for="nome">Nome completo</label>
+            <input id="nome" type="text" autocomplete="name" required aria-describedby="nome-error">
+            <p class="field-error" id="nome-error" hidden></p>
+          </div>
+          <div class="field-group">
+            <label for="email">E-mail</label>
+            <input id="email" type="email" autocomplete="email" required aria-describedby="email-error">
+            <p class="field-error" id="email-error" hidden></p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Entrega</legend>
+          <div class="field-group">
+            <label for="endereco">Endereço</label>
+            <input id="endereco" type="text" autocomplete="street-address" placeholder="Rua, número e bairro" required aria-describedby="endereco-error">
+            <p class="field-error" id="endereco-error" hidden></p>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label for="cidade">Cidade</label>
+              <input id="cidade" type="text" autocomplete="address-level2" required aria-describedby="cidade-error">
+              <p class="field-error" id="cidade-error" hidden></p>
+            </div>
+            <div class="field-group">
+              <label for="cep">CEP</label>
+              <input id="cep" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9" required aria-describedby="cep-error">
+              <p class="field-error" id="cep-error" hidden></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Pagamento (demonstração)</legend>
+          <div class="field-group">
+            <label for="cartao">Número do cartão</label>
+            <input id="cartao" type="text" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000" maxlength="19" required aria-describedby="cartao-error">
+            <p class="field-error" id="cartao-error" hidden></p>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label for="validade">Validade</label>
+              <input id="validade" type="text" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/AA" maxlength="5" required aria-describedby="validade-error">
+              <p class="field-error" id="validade-error" hidden></p>
+            </div>
+            <div class="field-group">
+              <label for="cvv">CVV</label>
+              <input id="cvv" type="password" inputmode="numeric" autocomplete="cc-csc" maxlength="4" required aria-describedby="cvv-error">
+              <p class="field-error" id="cvv-error" hidden></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <button class="btn btn-primary btn-block" type="submit">Finalizar pedido</button>
+      </form>
+
+      <aside class="order-summary" aria-labelledby="summary-title">
+        <h2 id="summary-title">Resumo do pedido</h2>
+        <ul class="summary-items" id="summary-items"></ul>
+        <dl class="totals">
+          <div><dt>Subtotal</dt><dd id="summary-subtotal"></dd></div>
+          <div><dt>Frete</dt><dd id="summary-shipping"></dd></div>
+          <div class="totals-total"><dt>Total</dt><dd id="summary-total"></dd></div>
+        </dl>
+      </aside>
+    </div>
+    <noscript><p>Ative o JavaScript para finalizar a compra.</p></noscript>
+  </main>
+
+  <script src="js/aviso-file.js"></script>
+  <script type="module" src="js/checkout.js"></script>
+</body>
+</html>
